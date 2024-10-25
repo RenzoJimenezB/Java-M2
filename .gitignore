@@ -39,3 +39,5 @@ build/
 
 # Ignore IntelliJ IDEA project files
 .idea/
+
+.env
