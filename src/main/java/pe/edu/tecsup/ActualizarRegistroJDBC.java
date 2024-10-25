@@ -1,5 +1,7 @@
 package pe.edu.tecsup;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,15 +10,21 @@ import java.sql.SQLException;
 public class ActualizarRegistroJDBC {
     public static void main(String[] args) {
 
-        try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/almacen1", "root", "tchai1712");
+        Dotenv dotenv = Dotenv.load();
 
-            String sql = "UPDATE categorias SET nombre=? WHERE id=?";
+        String url = dotenv.get("DB_URL");
+        String user = dotenv.get("DB_USER");
+        String password = dotenv.get("DB_PASSWORD");
+
+        try {
+            Connection con = DriverManager.getConnection(url, user, password);
+
+            String sql = "UPDATE categorias SET descripcion=? WHERE id=?";
             PreparedStatement ps = con.prepareStatement(sql);
 
             int id = 9;
 
-            ps.setString(1, "categoria 9");
+            ps.setString(1, "updated description 9");
             ps.setInt(2, id);
 
             int state = ps.executeUpdate();

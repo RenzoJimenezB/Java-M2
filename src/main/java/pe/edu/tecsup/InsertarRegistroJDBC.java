@@ -1,12 +1,20 @@
 package pe.edu.tecsup;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 import java.sql.*;
 
 public class InsertarRegistroJDBC {
     public static void main(String[] args) {
 
+        Dotenv dotenv = Dotenv.load();
+
+        String url = dotenv.get("DB_URL");
+        String user = dotenv.get("DB_USER");
+        String password = dotenv.get("DB_PASSWORD");
+
         try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/almacen1", "root", "tchai1712");
+            Connection con = DriverManager.getConnection(url, user, password);
 
             String sql = "INSERT INTO categorias (nombre, descripcion, orden) values (?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(sql);
@@ -26,7 +34,7 @@ public class InsertarRegistroJDBC {
             ResultSet rs = ps.executeQuery();
             if (rs.next())
                 categoryId = rs.getInt(1);
-            
+
             System.out.printf("Se ha insertado correctamente la categoría con ID: %d", categoryId);
 
             rs.close();

@@ -1,5 +1,7 @@
 package pe.edu.tecsup;
 
+import io.github.cdimascio.dotenv.Dotenv;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,13 +10,19 @@ import java.sql.SQLException;
 public class EliminarRegistroJDBC {
     public static void main(String[] args) {
 
+        Dotenv dotenv = Dotenv.load();
+
+        String url = dotenv.get("DB_URL");
+        String user = dotenv.get("DB_USER");
+        String password = dotenv.get("DB_PASSWORD");
+
         try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/almacen1", "root", "tchai1712");
+            Connection con = DriverManager.getConnection(url, user, password);
 
             String sql = "DELETE FROM categorias WHERE id=?";
             PreparedStatement ps = con.prepareStatement(sql);
 
-            int id = 7;
+            int id = 10;
 
             ps.setInt(1, id);
 
