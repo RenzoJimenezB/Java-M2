@@ -9,7 +9,6 @@ public class InsertarRegistroJDBC {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/almacen1", "root", "tchai1712");
 
             String sql = "INSERT INTO categorias (nombre, descripcion, orden) values (?, ?, ?)";
-
             PreparedStatement ps = con.prepareStatement(sql);
 
             ps.setString(1, "categoria 5");
@@ -20,17 +19,19 @@ public class InsertarRegistroJDBC {
             if (state != 1) throw new SQLException("No se pudo insertar la categoria");
 
             int categoryId = 0;
+
             sql = "SELECT LAST_INSERT_ID()";
             ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) categoryId = rs.getInt(1);
 
-            System.out.println("Se ha insertado correctamente la categoría con ID: " + categoryId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next())
+                categoryId = rs.getInt(1);
+            
+            System.out.printf("Se ha insertado correctamente la categoría con ID: %d", categoryId);
 
             rs.close();
             ps.close();
             con.close();
-
 
         } catch (SQLException e) {
             System.err.println("SQL error code: " + e.getErrorCode());

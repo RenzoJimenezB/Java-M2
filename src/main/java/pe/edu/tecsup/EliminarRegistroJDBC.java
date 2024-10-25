@@ -5,24 +5,23 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class ActualizarRegistroJDBC {
+public class EliminarRegistroJDBC {
     public static void main(String[] args) {
 
         try {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/almacen1", "root", "tchai1712");
 
-            String sql = "UPDATE categorias SET nombre=? WHERE id=?";
+            String sql = "DELETE FROM categorias WHERE id=?";
             PreparedStatement ps = con.prepareStatement(sql);
 
-            int id = 9;
+            int id = 7;
 
-            ps.setString(1, "categoria 9");
-            ps.setInt(2, id);
+            ps.setInt(1, id);
 
             int state = ps.executeUpdate();
-            if (state != 1) throw new SQLException("Error al actualizar el registro");
+            if (state != 1) throw new SQLException("Error al eliminar el registro");
 
-            System.out.printf("Se ha actualizado correctamente la categoria con ID: %d \n", id);
+            System.out.printf("Se ha eliminado la categoria con ID: %d \n", id);
 
             ps.close();
             con.close();

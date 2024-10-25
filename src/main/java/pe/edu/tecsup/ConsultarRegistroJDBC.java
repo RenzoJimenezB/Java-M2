@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 
-public class ConsultarRegistrosJDBC {
+public class ConsultarRegistroJDBC {
     public static void main(String[] args) {
 
         try {
