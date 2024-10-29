@@ -22,6 +22,7 @@
             <version>9.0.0</version> <!-- Choose the appropriate version -->
         </dependency>
 
+        <!-- Protobuf Java (to fix CVE-2024-7524 -->
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
