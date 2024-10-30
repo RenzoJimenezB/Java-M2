@@ -7,9 +7,9 @@ public class ConsultarRegistroConParametrosJDBC {
 
         try {
             Connection con = DriverManager.getConnection(
-                    ConnectionParamsJDBC.getUrl(),
-                    ConnectionParamsJDBC.getUser(),
-                    ConnectionParamsJDBC.getPassword());
+                    DatabaseConfig.getUrl(),
+                    DatabaseConfig.getUser(),
+                    DatabaseConfig.getPassword());
 
             String sql = """
                     SELECT id, nombre, descripcion

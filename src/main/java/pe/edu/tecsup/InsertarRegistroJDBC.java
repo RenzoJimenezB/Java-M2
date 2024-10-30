@@ -1,30 +1,32 @@
 package pe.edu.tecsup;
 
-import io.github.cdimascio.dotenv.Dotenv;
-
 import java.sql.*;
 
 public class InsertarRegistroJDBC {
     public static void main(String[] args) {
 
-        Dotenv dotenv = Dotenv.load();
-
-        String url = dotenv.get("DB_URL");
-        String user = dotenv.get("DB_USER");
-        String password = dotenv.get("DB_PASSWORD");
-
         try {
-            Connection con = DriverManager.getConnection(url, user, password);
+            Connection con = DriverManager.getConnection(
+                    DatabaseConfig.getUrl(),
+                    DatabaseConfig.getUser(),
+                    DatabaseConfig.getPassword()
+            );
 
-            String sql = "INSERT INTO categorias (nombre, descripcion, orden) values (?, ?, ?)";
+            String sql = """
+                    INSERT INTO productos (nombre, descripcion, precio, stock, categorias_id)
+                    VALUES (?, ?, ?, ?, ?)
+                    """;
             PreparedStatement ps = con.prepareStatement(sql);
 
-            ps.setString(1, "categoria 5");
-            ps.setString(2, "descripcion 5");
-            ps.setInt(3, 5);
+            ps.setString(1, "producto 5");
+            ps.setString(2, "descripcion producto 5");
+            ps.setDouble(3, 13.13);
+            ps.setInt(4, 1000);
+            ps.setInt(5, 3);
 
-            int state = ps.executeUpdate();
-            if (state != 1) throw new SQLException("No se pudo insertar la categoria");
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected != 1) throw new SQLException("No se pudo insertar la categoria");
 
             int categoryId = 0;
 

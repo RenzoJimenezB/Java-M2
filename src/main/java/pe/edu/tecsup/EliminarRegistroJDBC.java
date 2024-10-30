@@ -10,9 +10,9 @@ public class EliminarRegistroJDBC {
 
         try {
             Connection con = DriverManager.getConnection(
-                    ConnectionParamsJDBC.getUrl(),
-                    ConnectionParamsJDBC.getUser(),
-                    ConnectionParamsJDBC.getPassword()
+                    DatabaseConfig.getUrl(),
+                    DatabaseConfig.getUser(),
+                    DatabaseConfig.getPassword()
             );
 
             String sql = "DELETE FROM categorias WHERE id=?";
@@ -22,8 +22,8 @@ public class EliminarRegistroJDBC {
 
             ps.setInt(1, id);
 
-            int state = ps.executeUpdate();
-            if (state != 1) throw new SQLException("Error al eliminar el registro");
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected != 1) throw new SQLException("Error al eliminar el registro");
 
             System.out.printf("Se ha eliminado la categoria con ID: %d \n", id);
 

@@ -2,7 +2,7 @@ package pe.edu.tecsup;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
-public class ConnectionParamsJDBC {
+public class DatabaseConfig {
     private static final Dotenv dotenv = Dotenv.load();
 
     public static String getUrl() {

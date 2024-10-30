@@ -20,7 +20,7 @@ public class ConsultarRegistroJDBC {
         try {
             Connection con = DriverManager.getConnection(url, user, password);
 
-            String sql = "SELECT id, nombre, descripcion FROM categorias";
+            String sql = "SELECT id, nombre, descripcion, precio, stock, categorias_id FROM productos";
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
@@ -29,9 +29,11 @@ public class ConsultarRegistroJDBC {
                 int id = rs.getInt("id");
                 String nombre = rs.getString("nombre");
                 String descripcion = rs.getString("descripcion");
+                double precio = rs.getDouble("precio");
+                int stock = rs.getInt("stock");
+                int categoriasId = rs.getInt("categorias_id");
 
-                System.out.printf(">>> id = %d , nombre=%s, descripcion=%s %n", id, nombre, descripcion);
-//                System.out.println(">>> id = " + id + ", nombre=" + nombre + ", descripcion=" + descripcion);
+                System.out.printf(">>> id = %d , nombre=%s, descripcion=%s, precio=%.2f, stock=%d, categorias_id=%d %n", id, nombre, descripcion, precio, stock, categoriasId);
             }
 
             rs.close();

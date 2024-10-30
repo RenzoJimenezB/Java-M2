@@ -10,9 +10,9 @@ public class ActualizarRegistroJDBC {
 
         try {
             Connection con = DriverManager.getConnection(
-                    ConnectionParamsJDBC.getUrl(),
-                    ConnectionParamsJDBC.getUser(),
-                    ConnectionParamsJDBC.getPassword()
+                    DatabaseConfig.getUrl(),
+                    DatabaseConfig.getUser(),
+                    DatabaseConfig.getPassword()
             );
 
             String sql = "UPDATE categorias SET descripcion=? WHERE id=?";
@@ -23,8 +23,8 @@ public class ActualizarRegistroJDBC {
             ps.setString(1, "updated description 1");
             ps.setInt(2, id);
 
-            int state = ps.executeUpdate();
-            if (state != 1) throw new SQLException("Error al actualizar el registro");
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected != 1) throw new SQLException("Error al actualizar el registro");
 
             System.out.printf("Se ha actualizado correctamente la categoria con ID: %d \n", id);
 
