@@ -15,12 +15,16 @@ public class ActualizarRegistroJDBC {
                     DatabaseConfig.getPassword()
             );
 
-            String sql = "UPDATE categorias SET descripcion=? WHERE id=?";
+            String sql = """
+                    UPDATE productos
+                    SET nombre=?
+                    WHERE id=?
+                    """;
             PreparedStatement ps = con.prepareStatement(sql);
 
-            int id = 1;
+            int id = 6;
 
-            ps.setString(1, "updated description 1");
+            ps.setString(1, "producto 6");
             ps.setInt(2, id);
 
             int rowsAffected = ps.executeUpdate();

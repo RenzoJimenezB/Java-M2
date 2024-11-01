@@ -47,7 +47,7 @@ public class InsertarRegistroJDBC {
             System.err.println("SQL error code: " + e.getErrorCode());
             System.err.println("SQLState: " + e.getSQLState());
             System.err.println("SQL error message: " + e.getMessage());
-//            e.printStackTrace();
+            e.printStackTrace();
 //            throw new RuntimeException(e);
         }
     }

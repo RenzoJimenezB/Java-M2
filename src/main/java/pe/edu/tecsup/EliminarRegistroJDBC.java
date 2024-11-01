@@ -15,10 +15,13 @@ public class EliminarRegistroJDBC {
                     DatabaseConfig.getPassword()
             );
 
-            String sql = "DELETE FROM categorias WHERE id=?";
+            String sql = """
+                    DELETE FROM categorias
+                    WHERE id=?
+                    """;
             PreparedStatement ps = con.prepareStatement(sql);
 
-            int id = 9;
+            int id = 8;
 
             ps.setInt(1, id);
 
