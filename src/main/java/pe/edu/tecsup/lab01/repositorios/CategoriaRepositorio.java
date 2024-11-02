@@ -1,6 +1,7 @@
-package pe.edu.tecsup.lab01;
+package pe.edu.tecsup.lab01.repositorios;
 
 import io.github.cdimascio.dotenv.Dotenv;
+import pe.edu.tecsup.lab01.entidades.Categoria;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Consulta {
-    public static void main(String[] args) {
+public class CategoriaRepositorio {
+    public List<Categoria> getCategories() {
 
         Dotenv dotenv = Dotenv.load();
 
@@ -46,13 +47,15 @@ public class Consulta {
             stmt.close();
             con.close();
 
-            for (Categoria categoria : categorias) {
-                System.out.println(categoria);
-            }
+//            for (Categoria categoria : categorias) {
+//                System.out.println(categoria);
+//            }
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
 //            e.printStackTrace();
         }
+
+        return categorias;
     }
 }

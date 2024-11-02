@@ -1,4 +1,4 @@
-package pe.edu.tecsup.lab01;
+package pe.edu.tecsup.lab01.entidades;
 
 public class Categoria {
     private Integer id;
